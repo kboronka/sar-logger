@@ -17,8 +17,8 @@
 :BuildEnvironment
 	@echo off
 	pushd "%~dp0"
-	set SOLUTION=sar.sln
-	set REPO=https://github.com/kboronka/sar-tool
+	set SOLUTION=sarLogger.sln
+	set REPO=https://github.com/kboronka/sar-logger
 	set CONFIG=Release
 	set BASEPATH=%~dp0
 
@@ -26,7 +26,6 @@
 	set SAR="release\sar.exe"
 	set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
 
-	
 :Build
 	echo "VERSION.MAJOR.MINOR.BUILD".
 	set /p VERSION="> "
@@ -34,22 +33,9 @@
 	svn cleanup
 	svn update
 
-	%SAR% -f.bsd \quickLog\source\*.cs "Kevin Boronka"
-	%SAR% -assy.ver \quickLog\source\AssemblyInfo.* %VERSION%
-	%SAR% -f.del quickLog\source\bin\%CONFIG%\*.* /q /svn
-
-	%SAR% -b.net 3.5 sarQuckLog.sln /p:Configuration=%CONFIG% /p:Platform=\"x86\"
-	if errorlevel 1 goto BuildFailed
-
-	copy quickLog\source\bin\%CONFIG%\*.exe quickLog\release\*.exe
-	copy quickLog\source\bin\%CONFIG%\*.pdb quickLog\release\*.pdb
-
-
-	%SAR% -f.bsd \sar\*.cs "Kevin Boronka"
-	%SAR% -f.bsd \sarTesting\*.cs "Kevin Boronka"
-	%SAR% -assy.ver \sar\AssemblyInfo.* %VERSION%
-
-	%SAR% -f.del sar\bin\%CONFIG%\*.* /q /svn
+	%SAR% -f.bsd \sarLogger\*.cs "Kevin Boronka"
+	%SAR% -assy.ver \sarLogger\AssemblyInfo.* %VERSION%
+	%SAR% -f.del sarLogger\bin\%CONFIG%\*.* /q /svn
 	
 	echo building binaries
 	%SAR% -b.net 3.5 %SOLUTION% /p:Configuration=%CONFIG% /p:Platform=\"x86\"
@@ -57,12 +43,12 @@
 	
 
 :BuildComplete
-	copy sar\bin\%CONFIG%\*.exe release\*.exe
-	copy sar\bin\%CONFIG%\*.pdb release\*.pdb
-	copy license.txt release\license.txt
+	copy sarLogger\bin\%CONFIG%\*.exe release\*.exe
+	copy sarLogger\bin\%CONFIG%\*.pdb release\*.pdb
+	copy LICENSE release\LICENSE
 	
-	%ZIP% "sar %VERSION%.zip" .\release\*.*
-	svn commit -m "sar version %VERSION%"
+	%ZIP% "sar-logger %VERSION%.zip" .\release\*.*
+	svn commit -m "sar-logger version %VERSION%"
 	svn copy %REPO%/trunk %REPO%/tags/%VERSION% -m "Tagging the %VERSION% version release of the project"
 	svn update
 	
