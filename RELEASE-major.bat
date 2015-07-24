@@ -17,13 +17,13 @@
 :BuildEnvironment
 	@echo off
 	pushd "%~dp0"
-	set SOLUTION=sarLogger.sln
+	set SOLUTION=sar-logger.sln
 	set REPO=https://github.com/kboronka/sar-logger
 	set CONFIG=Release
 	set BASEPATH=%~dp0
 
 :Paths
-	set SAR="release\sar.exe"
+	set SAR="libs\sar-tool\release\sar.exe"
 	set ZIP="%PROGRAMFILES%\7-Zip\7zG.exe" a -tzip
 
 :Build
