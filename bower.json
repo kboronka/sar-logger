@@ -1,0 +1,6 @@
+{
+  "name": "sar-logger",
+  "dependencies": {
+    "sar-tool": "https://github.com/kboronka/sar-tool.git#master"
+  }
+}
