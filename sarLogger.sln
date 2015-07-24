@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 # SharpDevelop 5.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quickLog", "quickLog\source\quickLog.csproj", "{1A2E20F1-0940-4E89-ADCD-3F4EF0B96066}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sarLogger", "sarLogger\sarLogger.csproj", "{1A2E20F1-0940-4E89-ADCD-3F4EF0B96066}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
